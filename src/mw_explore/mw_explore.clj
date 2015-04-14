@@ -27,11 +27,11 @@
 ;; **
 
 ;; @@
-;; (time (def w0 (heightmap/apply-heightmap "../mw-ui/resources/public/img/heightmaps/great_britain_and_ireland_med.png")))
-(time (def w0 (heightmap/apply-heightmap "../mw-ui/resources/public/img/heightmaps/small_hill.png")))
+(time (def w0 (heightmap/apply-heightmap "../mw-ui/resources/public/img/heightmaps/great_britain_and_ireland_med.png")))
+;; (time (def w0 (heightmap/apply-heightmap "../mw-ui/resources/public/img/heightmaps/small_hill.png")))
 ;; @@
 ;; ->
-;;; &quot;Elapsed time: 4528.717923 msecs&quot;
+;;; &quot;Elapsed time: 1295.377747 msecs&quot;
 ;;; 
 ;; <-
 ;; =>
@@ -39,32 +39,32 @@
 ;; <=
 
 ;; **
-;;; ## Fill in any local hollows
+;;; ## Fill in any local hollows, and add rain
 ;;; 
-;;; At this stage, only detects/corrects single-cell hollows. 
+;;; At this stage, only detects/corrects single-cell hollows. Note that this takes a long time - on my (very fast) computer it takes quarter of an hour.
 ;; **
 
 ;; @@
-(time (def w1 (drainage/flood-hollows w0)))
+(time (def w1 (drainage/rain-world (drainage/flood-hollows w0))))
 ;; @@
+;; ->
+;;; &quot;Elapsed time: 897449.632732 msecs&quot;
+;;; 
+;; <-
+;; =>
+;;; {"type":"html","content":"<span class='clj-var'>#&#x27;mw-explore.mw-explore/w1</span>","value":"#'mw-explore.mw-explore/w1"}
+;; <=
 
 ;; **
 ;;; ## Next, trace the water flow
 ;;; 
-;;; The present algorithm adds the sum of the flow through all the cells for which the cell currently under consideration is the lowest neighbour, recursively uphill. At present I return only the cell under consideration, with the consequence that most cells have their flow computed many times, but discarded on all but one of those occasions. This is obviously inefficient
+;;; The present algorithm adds the sum of the flow through all the cells for which the cell currently under consideration is the lowest neighbour, recursively uphill.  This is obviously inefficient and at present takes even longer.
 ;;; 	
 ;; **
 
 ;; @@
 (time (def w2 (drainage/flow-world w1)))
 ;; @@
-;; ->
-;;; &quot;Elapsed time: 1069014.682936 msecs&quot;
-;;; 
-;; <-
-;; =>
-;;; {"type":"html","content":"<span class='clj-var'>#&#x27;mw-explore.mw-explore/w2</span>","value":"#'mw-explore.mw-explore/w2"}
-;; <=
 
 ;; **
 ;;; Notice how long it took! This is woefully inefficient. It is a big job - but it isn't that big a job.
