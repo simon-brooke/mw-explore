@@ -27,11 +27,13 @@
 ;; **
 
 ;; @@
-(time (def w0 (heightmap/apply-heightmap "../mw-ui/resources/public/img/heightmaps/great_britain_and_ireland_med.png")))
-;; (time (def w0 (heightmap/apply-heightmap "../mw-ui/resources/public/img/heightmaps/small_hill.png")))
+;;(time (def w0 (heightmap/apply-heightmap "../mw-ui/resources/public/img/heightmaps/great_britain_and_ireland_med.png")))
+(time (def w0 (heightmap/apply-heightmap "../mw-ui/resources/public/img/heightmaps/great_britain_and_ireland_original.png")))
+;;(time (def w0 (heightmap/apply-heightmap "../mw-ui/resources/public/img/heightmaps/great_britain_and_ireland_small.png")))
+;;(time (def w0 (heightmap/apply-heightmap "../mw-ui/resources/public/img/heightmaps/small_hill.png")))
 ;; @@
 ;; ->
-;;; &quot;Elapsed time: 1295.377747 msecs&quot;
+;;; &quot;Elapsed time: 1555.555578 msecs&quot;
 ;;; 
 ;; <-
 ;; =>
@@ -48,7 +50,7 @@
 (time (def w1 (drainage/rain-world (drainage/flood-hollows w0))))
 ;; @@
 ;; ->
-;;; &quot;Elapsed time: 897449.632732 msecs&quot;
+;;; &quot;Elapsed time: 865276.685472 msecs&quot;
 ;;; 
 ;; <-
 ;; =>
@@ -59,12 +61,19 @@
 ;;; ## Next, trace the water flow
 ;;; 
 ;;; The present algorithm adds the sum of the flow through all the cells for which the cell currently under consideration is the lowest neighbour, recursively uphill.  This is obviously inefficient and at present takes even longer.
-;;; 	
+;;; 
 ;; **
 
 ;; @@
-(time (def w2 (drainage/flow-world w1)))
+(time (def w2 (drainage/flow-world-nr w1)))
 ;; @@
+;; ->
+;;; &quot;Elapsed time: 950758.294506 msecs&quot;
+;;; 
+;; <-
+;; =>
+;;; {"type":"html","content":"<span class='clj-var'>#&#x27;mw-explore.mw-explore/w2</span>","value":"#'mw-explore.mw-explore/w2"}
+;; <=
 
 ;; **
 ;;; Notice how long it took! This is woefully inefficient. It is a big job - but it isn't that big a job.
@@ -75,7 +84,7 @@
 ;; **
 
 ;; @@
-(defn shades-of-blue 
+(defn shades-of-blue
   "Create CSS specifications for shades of blue which vary in intensity with `n`."
   [n]
   (cond
@@ -135,7 +144,7 @@
 (render-cell {:flow 10 :altitude 20})
 ;; @@
 ;; =>
-;;; {"type":"list-like","open":"<span class='clj-vector'>[</span>","close":"<span class='clj-vector'>]</span>","separator":" ","items":[{"type":"html","content":"<span class='clj-keyword'>:td</span>","value":":td"},{"type":"list-like","open":"<span class='clj-map'>{</span>","close":"<span class='clj-map'>}</span>","separator":", ","items":[{"type":"list-like","open":"","close":"","separator":" ","items":[{"type":"html","content":"<span class='clj-keyword'>:style</span>","value":":style"},{"type":"html","content":"<span class='clj-string'>&quot;background-color: rgb( 215, 215, 255);&quot;</span>","value":"\"background-color: rgb( 215, 215, 255);\""}],"value":"[:style \"background-color: rgb( 215, 215, 255);\"]"}],"value":"{:style \"background-color: rgb( 215, 215, 255);\"}"},{"type":"html","content":"<span class='clj-string'>&quot;&amp;nbsp;&quot;</span>","value":"\"&nbsp;\""},{"type":"html","content":"<span class='clj-long'>20</span>","value":"20"}],"value":"[:td {:style \"background-color: rgb( 215, 215, 255);\"} \"&nbsp;\" 20]"}
+;;; {"type":"list-like","open":"<span class='clj-vector'>[</span>","close":"<span class='clj-vector'>]</span>","separator":" ","items":[{"type":"html","content":"<span class='clj-keyword'>:td</span>","value":":td"},{"type":"list-like","open":"<span class='clj-map'>{</span>","close":"<span class='clj-map'>}</span>","separator":", ","items":[{"type":"list-like","open":"","close":"","separator":" ","items":[{"type":"html","content":"<span class='clj-keyword'>:style</span>","value":":style"},{"type":"html","content":"<span class='clj-string'>&quot;background-color: rgb( 215, 215, 255);&quot;</span>","value":"\"background-color: rgb( 215, 215, 255);\""}],"value":"[:style \"background-color: rgb( 215, 215, 255);\"]"},{"type":"list-like","open":"","close":"","separator":" ","items":[{"type":"html","content":"<span class='clj-keyword'>:title</span>","value":":title"},{"type":"html","content":"<span class='clj-string'>&quot;{:flow 10, :altitude 20}&quot;</span>","value":"\"{:flow 10, :altitude 20}\""}],"value":"[:title \"{:flow 10, :altitude 20}\"]"}],"value":"{:style \"background-color: rgb( 215, 215, 255);\", :title \"{:flow 10, :altitude 20}\"}"},{"type":"html","content":"<span class='clj-string'>&quot;&amp;nbsp;&quot;</span>","value":"\"&nbsp;\""},{"type":"html","content":"<span class='clj-long'>20</span>","value":"20"}],"value":"[:td {:style \"background-color: rgb( 215, 215, 255);\", :title \"{:flow 10, :altitude 20}\"} \"&nbsp;\" 20]"}
 ;; <=
 
 ;; @@
@@ -172,7 +181,7 @@
 (nth (nth w2 128) 128)
 ;; @@
 ;; =>
-;;; {"type":"list-like","open":"<span class='clj-map'>{</span>","close":"<span class='clj-map'>}</span>","separator":", ","items":[{"type":"list-like","open":"","close":"","separator":" ","items":[{"type":"html","content":"<span class='clj-keyword'>:flow</span>","value":":flow"},{"type":"html","content":"<span class='clj-long'>2</span>","value":"2"}],"value":"[:flow 2]"},{"type":"list-like","open":"","close":"","separator":" ","items":[{"type":"html","content":"<span class='clj-keyword'>:rainfall</span>","value":":rainfall"},{"type":"html","content":"<span class='clj-long'>1</span>","value":"1"}],"value":"[:rainfall 1]"},{"type":"list-like","open":"","close":"","separator":" ","items":[{"type":"html","content":"<span class='clj-keyword'>:gradient</span>","value":":gradient"},{"type":"html","content":"<span class='clj-long'>68</span>","value":"68"}],"value":"[:gradient 68]"},{"type":"list-like","open":"","close":"","separator":" ","items":[{"type":"html","content":"<span class='clj-keyword'>:altitude</span>","value":":altitude"},{"type":"html","content":"<span class='clj-long'>42</span>","value":"42"}],"value":"[:altitude 42]"},{"type":"list-like","open":"","close":"","separator":" ","items":[{"type":"html","content":"<span class='clj-keyword'>:x</span>","value":":x"},{"type":"html","content":"<span class='clj-long'>128</span>","value":"128"}],"value":"[:x 128]"},{"type":"list-like","open":"","close":"","separator":" ","items":[{"type":"html","content":"<span class='clj-keyword'>:y</span>","value":":y"},{"type":"html","content":"<span class='clj-long'>128</span>","value":"128"}],"value":"[:y 128]"},{"type":"list-like","open":"","close":"","separator":" ","items":[{"type":"html","content":"<span class='clj-keyword'>:state</span>","value":":state"},{"type":"html","content":"<span class='clj-keyword'>:new</span>","value":":new"}],"value":"[:state :new]"}],"value":"{:flow 2, :rainfall 1, :gradient 68, :altitude 42, :x 128, :y 128, :state :new}"}
+;;; {"type":"list-like","open":"<span class='clj-map'>{</span>","close":"<span class='clj-map'>}</span>","separator":", ","items":[{"type":"list-like","open":"","close":"","separator":" ","items":[{"type":"html","content":"<span class='clj-keyword'>:flow</span>","value":":flow"},{"type":"html","content":"<span class='clj-long'>1</span>","value":"1"}],"value":"[:flow 1]"},{"type":"list-like","open":"","close":"","separator":" ","items":[{"type":"html","content":"<span class='clj-keyword'>:generation</span>","value":":generation"},{"type":"html","content":"<span class='clj-long'>256</span>","value":"256"}],"value":"[:generation 256]"},{"type":"list-like","open":"","close":"","separator":" ","items":[{"type":"html","content":"<span class='clj-keyword'>:rainfall</span>","value":":rainfall"},{"type":"html","content":"<span class='clj-long'>1</span>","value":"1"}],"value":"[:rainfall 1]"},{"type":"list-like","open":"","close":"","separator":" ","items":[{"type":"html","content":"<span class='clj-keyword'>:gradient</span>","value":":gradient"},{"type":"html","content":"<span class='clj-long'>68</span>","value":"68"}],"value":"[:gradient 68]"},{"type":"list-like","open":"","close":"","separator":" ","items":[{"type":"html","content":"<span class='clj-keyword'>:altitude</span>","value":":altitude"},{"type":"html","content":"<span class='clj-long'>42</span>","value":"42"}],"value":"[:altitude 42]"},{"type":"list-like","open":"","close":"","separator":" ","items":[{"type":"html","content":"<span class='clj-keyword'>:x</span>","value":":x"},{"type":"html","content":"<span class='clj-long'>128</span>","value":"128"}],"value":"[:x 128]"},{"type":"list-like","open":"","close":"","separator":" ","items":[{"type":"html","content":"<span class='clj-keyword'>:y</span>","value":":y"},{"type":"html","content":"<span class='clj-long'>128</span>","value":"128"}],"value":"[:y 128]"},{"type":"list-like","open":"","close":"","separator":" ","items":[{"type":"html","content":"<span class='clj-keyword'>:state</span>","value":":state"},{"type":"html","content":"<span class='clj-keyword'>:new</span>","value":":new"}],"value":"[:state :new]"}],"value":"{:flow 1, :generation 256, :rainfall 1, :gradient 68, :altitude 42, :x 128, :y 128, :state :new}"}
 ;; <=
 
 ;; @@
@@ -180,14 +189,14 @@
 
 ;; @@
 ;; =>
-;;; {"type":"list-like","open":"<span class='clj-vector'>[</span>","close":"<span class='clj-vector'>]</span>","separator":" ","items":[{"type":"html","content":"<span class='clj-keyword'>:td</span>","value":":td"},{"type":"list-like","open":"<span class='clj-map'>{</span>","close":"<span class='clj-map'>}</span>","separator":", ","items":[{"type":"list-like","open":"","close":"","separator":" ","items":[{"type":"html","content":"<span class='clj-keyword'>:style</span>","value":":style"},{"type":"html","content":"<span class='clj-string'>&quot;background-color: rgb( 247, 247, 255);&quot;</span>","value":"\"background-color: rgb( 247, 247, 255);\""}],"value":"[:style \"background-color: rgb( 247, 247, 255);\"]"}],"value":"{:style \"background-color: rgb( 247, 247, 255);\"}"},{"type":"html","content":"<span class='clj-string'>&quot;&amp;nbsp;&quot;</span>","value":"\"&nbsp;\""},{"type":"html","content":"<span class='clj-long'>42</span>","value":"42"}],"value":"[:td {:style \"background-color: rgb( 247, 247, 255);\"} \"&nbsp;\" 42]"}
+;;; {"type":"list-like","open":"<span class='clj-vector'>[</span>","close":"<span class='clj-vector'>]</span>","separator":" ","items":[{"type":"html","content":"<span class='clj-keyword'>:td</span>","value":":td"},{"type":"list-like","open":"<span class='clj-map'>{</span>","close":"<span class='clj-map'>}</span>","separator":", ","items":[{"type":"list-like","open":"","close":"","separator":" ","items":[{"type":"html","content":"<span class='clj-keyword'>:style</span>","value":":style"},{"type":"html","content":"<span class='clj-string'>&quot;background-color: rgb( 251, 251, 255);&quot;</span>","value":"\"background-color: rgb( 251, 251, 255);\""}],"value":"[:style \"background-color: rgb( 251, 251, 255);\"]"},{"type":"list-like","open":"","close":"","separator":" ","items":[{"type":"html","content":"<span class='clj-keyword'>:title</span>","value":":title"},{"type":"html","content":"<span class='clj-string'>&quot;{:flow 1, :generation 256, :rainfall 1, :gradient 68, :altitude 42, :x 128, :y 128, :state :new}&quot;</span>","value":"\"{:flow 1, :generation 256, :rainfall 1, :gradient 68, :altitude 42, :x 128, :y 128, :state :new}\""}],"value":"[:title \"{:flow 1, :generation 256, :rainfall 1, :gradient 68, :altitude 42, :x 128, :y 128, :state :new}\"]"}],"value":"{:style \"background-color: rgb( 251, 251, 255);\", :title \"{:flow 1, :generation 256, :rainfall 1, :gradient 68, :altitude 42, :x 128, :y 128, :state :new}\"}"},{"type":"html","content":"<span class='clj-string'>&quot;&amp;nbsp;&quot;</span>","value":"\"&nbsp;\""},{"type":"html","content":"<span class='clj-long'>42</span>","value":"42"}],"value":"[:td {:style \"background-color: rgb( 251, 251, 255);\", :title \"{:flow 1, :generation 256, :rainfall 1, :gradient 68, :altitude 42, :x 128, :y 128, :state :new}\"} \"&nbsp;\" 42]"}
 ;; <=
 
 ;; @@
 (html (render-cell (nth (nth w2 128) 128)))
 ;; @@
 ;; =>
-;;; {"type":"html","content":"<span class='clj-string'>&quot;&lt;td style=\\&quot;background-color: rgb( 247, 247, 255);\\&quot;&gt;&amp;nbsp;42&lt;/td&gt;&quot;</span>","value":"\"<td style=\\\"background-color: rgb( 247, 247, 255);\\\">&nbsp;42</td>\""}
+;;; {"type":"html","content":"<span class='clj-string'>&quot;&lt;td style=\\&quot;background-color: rgb( 251, 251, 255);\\&quot; title=\\&quot;{:flow 1, :generation 256, :rainfall 1, :gradient 68, :altitude 42, :x 128, :y 128, :state :new}\\&quot;&gt;&amp;nbsp;42&lt;/td&gt;&quot;</span>","value":"\"<td style=\\\"background-color: rgb( 251, 251, 255);\\\" title=\\\"{:flow 1, :generation 256, :rainfall 1, :gradient 68, :altitude 42, :x 128, :y 128, :state :new}\\\">&nbsp;42</td>\""}
 ;; <=
 
 ;; **
@@ -200,7 +209,7 @@
 (time (spit "render.html" (html (render-world-table w2))))
 ;; @@
 ;; ->
-;;; &quot;Elapsed time: 2905.812945 msecs&quot;
+;;; &quot;Elapsed time: 2386.180766 msecs&quot;
 ;;; 
 ;; <-
 ;; =>
