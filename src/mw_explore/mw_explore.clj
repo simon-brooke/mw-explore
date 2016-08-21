@@ -2,7 +2,7 @@
 
 ;; **
 ;;; # Microworld Drainage Exploration
-;;; 
+;;;
 ;;; This is a buffer I've set up to explore ideas about drainage.
 ;; **
 
@@ -22,7 +22,7 @@
 
 ;; **
 ;;; ## Create a world - from a heightmap
-;;; 
+;;;
 ;;; I'm using the 'medium' (8 Km per pixel) heightmap, to get some detail. This is slow but not disastrously so. This map is 256 pixels square.
 ;; **
 
@@ -34,7 +34,7 @@
 ;; @@
 ;; ->
 ;;; &quot;Elapsed time: 1555.555578 msecs&quot;
-;;; 
+;;;
 ;; <-
 ;; =>
 ;;; {"type":"html","content":"<span class='clj-var'>#&#x27;mw-explore.mw-explore/w0</span>","value":"#'mw-explore.mw-explore/w0"}
@@ -42,7 +42,7 @@
 
 ;; **
 ;;; ## Fill in any local hollows, and add rain
-;;; 
+;;;
 ;;; At this stage, only detects/corrects single-cell hollows. Note that this takes a long time - on my (very fast) computer it takes quarter of an hour.
 ;; **
 
@@ -51,7 +51,7 @@
 ;; @@
 ;; ->
 ;;; &quot;Elapsed time: 865276.685472 msecs&quot;
-;;; 
+;;;
 ;; <-
 ;; =>
 ;;; {"type":"html","content":"<span class='clj-var'>#&#x27;mw-explore.mw-explore/w1</span>","value":"#'mw-explore.mw-explore/w1"}
@@ -59,9 +59,9 @@
 
 ;; **
 ;;; ## Next, trace the water flow
-;;; 
+;;;
 ;;; The present algorithm adds the sum of the flow through all the cells for which the cell currently under consideration is the lowest neighbour, recursively uphill.  This is obviously inefficient and at present takes even longer.
-;;; 
+;;;
 ;; **
 
 ;; @@
@@ -69,7 +69,7 @@
 ;; @@
 ;; ->
 ;;; &quot;Elapsed time: 950758.294506 msecs&quot;
-;;; 
+;;;
 ;; <-
 ;; =>
 ;;; {"type":"html","content":"<span class='clj-var'>#&#x27;mw-explore.mw-explore/w2</span>","value":"#'mw-explore.mw-explore/w2"}
@@ -77,9 +77,9 @@
 
 ;; **
 ;;; Notice how long it took! This is woefully inefficient. It is a big job - but it isn't that big a job.
-;;; 
+;;;
 ;;; ## Next, visualise that
-;;; 
+;;;
 ;;; I don't have any ready-made code to visualise the waterflow, so I'll have to extemporise. First, we need a way of creating a colour gradient.
 ;; **
 
@@ -122,7 +122,7 @@
 
 ;; **
 ;;; ### OK, that works
-;;; 
+;;;
 ;;; Now to build an HTML cell representation of a world cell. Fortunately, I've done something like this before.
 ;; **
 
@@ -201,7 +201,7 @@
 
 ;; **
 ;;; ## OK, now we can visualise what we've got
-;;; 
+;;;
 ;;; We'll render the world we've created to an HTML file, and then look at the file.
 ;; **
 
@@ -210,7 +210,7 @@
 ;; @@
 ;; ->
 ;;; &quot;Elapsed time: 2386.180766 msecs&quot;
-;;; 
+;;;
 ;; <-
 ;; =>
 ;;; {"type":"html","content":"<span class='clj-nil'>nil</span>","value":"nil"}

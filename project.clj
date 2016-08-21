@@ -7,7 +7,7 @@
                  [hiccup "1.0.5"]
                  [mw-engine "0.1.5-SNAPSHOT"]
                  [mw-parser "0.1.5-SNAPSHOT"]]
-  :plugins [[lein-gorilla "0.3.4"]]
+  :plugins [[lein-gorilla "0.3.6"]]
 ;;  :jvm-opts ["-XX:ThreadStackSize=8192k"]
   :jvm-opts ["-d64" "-Xmx12g"]
   )
